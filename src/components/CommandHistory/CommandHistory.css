@@ -1,0 +1,16 @@
+.command-history__list {
+  text-align: left;
+  overflow-y: auto;
+  overflow-x: hidden !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0 auto;
+  border: 1px solid;
+  scroll-snap-type: y proximity;
+}
+
+.command-history__list ul li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
