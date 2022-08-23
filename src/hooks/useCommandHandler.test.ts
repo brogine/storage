@@ -77,7 +77,7 @@ describe('useCommandHandler', () => {
 
       const [, , , isValid, errorMessage] = result.current
       expect(isValid).toBe(false)
-      expect(errorMessage).toBe('Key and value can't be longer than 256 characters each.')
+      expect(errorMessage).toBe('Key and value can\'t be longer than 256 characters each.')
     })
   })
 
