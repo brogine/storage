@@ -1,0 +1,42 @@
+.command-input__container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 60%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .command-input__container {
+    width: 100%;
+  }
+}
+
+.command-input__text {
+  padding: 5px;
+  margin: 5px;
+  font-size: 15px;
+  border-radius: 5px;
+  min-width: 200px;
+}
+
+.command-input__submit {
+  background-color: #1c3042;
+  color: #FFF;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.command-input__submit:disabled {
+  cursor: not-allowed;
+  background-color: #c0c0c0;
+  color: rgb(25, 25, 25);
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.command-input__helpers .is-invalid {
+  color: red;
+}
