@@ -24,6 +24,8 @@ const DEFAULT_STATE = {
   errorMessage: '',
 }
 
+const COMMAND_HISTORY_PREFIX = '>'
+
 export default function useCommandHandler() {
   const dispatch = useDispatch()
   const [commandState, setComandState] = useState(DEFAULT_STATE)
@@ -89,7 +91,7 @@ export default function useCommandHandler() {
   const dispatchCommand = () => {
     if (!isValid) return
 
-    dispatch(logCommand(parsedCommand.rawValue))
+    dispatch(logCommand(`${COMMAND_HISTORY_PREFIX} ${parsedCommand.rawValue}`))
     switch (parsedCommand.keyword) {
       case AvailableCommands.SET:
         dispatch(setRecord([parsedCommand.key, parsedCommand.value]))

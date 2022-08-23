@@ -118,7 +118,7 @@ describe('useCommandHandler', () => {
 
         expect(mockDispatch).toHaveBeenCalledTimes(2)
         expect(mockDispatch).toHaveBeenCalledWith({
-          payload: 'DELETE someKey',
+          payload: '> DELETE someKey',
           type: 'keyValueStorage/logCommand',
         })
         expect(mockDispatch).toHaveBeenCalledWith({
