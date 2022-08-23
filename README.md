@@ -1,46 +1,120 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Getting Started with Key Value Storage
 
 ## Available Scripts
 
-In the project directory, you can run:
+Start by running `yarn install` to install dependencies and then `yarn start`
 
-### `yarn start`
+### Main application
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The application consists of a form where you can enter commands to interact with an in-memory state which will respond.\
+You can also see the history of all the commands you submitted in the list below the form.\
+There's a tooltip to help you introduce the commands with the correspondig params.\
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Available commands
+
+### Important
+
+keys and values are Case Sensitive. Commands are not.\
+Keys and values only accept strings and digits with a maximum of 255 characters each.\
+Parenthesis are only to show where parameters start and end, don't use them when submitting commands.\
+
+### Commands
+
+- SET (key) (value)\: Store the value for key
+- GET (key)\: Return the current value for key
+- DELETE (key)\: Remove the entry for key
+- COUNT (value)\: Return the number of keys that have the given value
+- BEGIN\: Start a new transaction
+- COMMIT\: Complete the current transaction
+- ROLLBACK\: Revert to state prior to BEGIN call
+
+### Examples
+
+Set and get a value
+
+```Bash
+> SET foo 123
+> GET foo
+123
+```
+
+Delete a value
+
+```Bash
+> DELETE foo
+> GET foo
+key not set
+```
+
+Count the number of occurrences of a value
+
+```Bash
+> SET foo 123
+> SET bar 456
+> SET baz 123
+> COUNT 123
+123
+> COUNT 456
+456
+```
+
+Commit a transaction
+
+```Bash
+> BEGIN
+> SET foo 456
+> COMMIT
+> ROLLBACK
+no transaction
+> GET foo
+456
+```
+
+Rollback a transaction
+
+```Bash
+> SET foo 123
+> SET bar abc
+> BEGIN
+> SET foo 456
+> GET foo
+456
+> SET bar def
+> GET bar
+def
+> ROLLBACK
+> GET foo
+123
+> GET bar
+abc
+> COMMIT
+no transaction
+```
+
+Nested transactions
+
+```Bash
+> SET foo 123
+> BEGIN
+> SET bar 456
+> SET foo 456
+> BEGIN
+> COUNT 456
+2
+> GET foo
+456
+> SET foo 789
+> GET foo
+789
+> ROLLBACK
+> GET foo
+456
+> ROLLBACK
+> GET foo
+123
+```
 
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can see the coverage by running with the flag: `yarn test -- --coverage`
