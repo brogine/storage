@@ -22,7 +22,7 @@ const CommandHistory = ({ commandsLog }: CommandHistoryProps) => {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    commandsLog: state.storage.logs
+    commandsLog: state.storage.logs,
   }
 }
 

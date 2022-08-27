@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import commandValidationRules from '../config/commandValidationRules'
 import { AvailableCommands } from '../config/types'
 import {
@@ -11,7 +12,6 @@ import {
   rollbackLatestTransaction,
   logCommand,
 } from '../features/keyValueStorage/keyValueStorageSlice'
-import { useDispatch } from 'react-redux'
 
 const DEFAULT_STATE = {
   parsedCommand: {
@@ -30,6 +30,10 @@ export default function useCommandHandler() {
   const dispatch = useDispatch()
   const [commandState, setComandState] = useState(DEFAULT_STATE)
   const { isValid, errorMessage, parsedCommand } = commandState
+
+  const resetCommandState = () => {
+    setComandState(DEFAULT_STATE)
+  }
 
   const validateInput = (input: string) => {
     if (input === '') {
@@ -52,7 +56,7 @@ export default function useCommandHandler() {
       return
     }
 
-    const globalRule = commandValidationRules['GLOBAL'].rule
+    const globalRule = commandValidationRules.GLOBAL.rule
     if (
       (key && !globalRule.expression.test(key.length.toString())) ||
       (value && !globalRule.expression.test(value.length.toString()))
@@ -82,10 +86,6 @@ export default function useCommandHandler() {
       isValid: true,
       errorMessage: '',
     })
-  }
-
-  const resetCommandState = () => {
-    setComandState(DEFAULT_STATE)
   }
 
   const dispatchCommand = () => {

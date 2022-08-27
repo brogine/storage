@@ -13,7 +13,10 @@ const SUBMIT_CLASS = `${ROOT_CLASS}__submit`
 
 export default function CommandInput() {
   const [validateInput, dispatchCommand, rawValue, isValid, errorMessage] = useCommandHandler()
-  const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => validateInput(event.target.value), [])
+  const handleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => validateInput(event.target.value),
+    [],
+  )
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key !== 'Enter') return
 
@@ -25,17 +28,19 @@ export default function CommandInput() {
       <div className={DATA_CONTAINER_CLASS}>
         <DebounceInput
           className={INPUT_TEXT_CLASS}
-          placeholder="Write a command"
+          placeholder='Write a command'
           minLength={3}
           debounceTimeout={300}
           onChange={handleInputChange}
           onKeyUp={handleKeyPress}
           value={rawValue}
         />
-        <button className={SUBMIT_CLASS} disabled={!isValid} onClick={dispatchCommand}>Submit</button>
+        <button className={SUBMIT_CLASS} disabled={!isValid} onClick={dispatchCommand}>
+          Submit
+        </button>
       </div>
       <div className={HELPERS_CONTAINER_CLASS}>
-        {errorMessage ? <div className="is-invalid">{errorMessage}</div> : null}
+        {errorMessage ? <div className='is-invalid'>{errorMessage}</div> : null}
         <CommandTooltipHelp />
       </div>
     </div>

@@ -46,7 +46,7 @@ const commandValidationRules = {
   GLOBAL: {
     rule: {
       expression: /^([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/,
-      errorMessage: 'Key and value can\'t be longer than 256 characters each.',
+      errorMessage: "Key and value can't be longer than 256 characters each.",
     },
   },
 }

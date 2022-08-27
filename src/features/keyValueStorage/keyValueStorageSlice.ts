@@ -4,7 +4,7 @@ import { StorageState } from '../../config/types'
 const initialState = {
   records: {},
   transactions: [],
-  logs: []
+  logs: [],
 } as StorageState
 
 export const keyValueStorageSlice = createSlice({
@@ -88,6 +88,15 @@ export const keyValueStorageSlice = createSlice({
   }
 })
 
-export const { setRecord, deleteRecord, getRecord, countRecords, beginTransaction, commitLatestTransaction, rollbackLatestTransaction, logCommand } = keyValueStorageSlice.actions
+export const {
+  setRecord,
+  deleteRecord,
+  getRecord,
+  countRecords,
+  beginTransaction,
+  commitLatestTransaction,
+  rollbackLatestTransaction,
+  logCommand,
+} = keyValueStorageSlice.actions
 
 export default keyValueStorageSlice.reducer

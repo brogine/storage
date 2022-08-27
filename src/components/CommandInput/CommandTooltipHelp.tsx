@@ -8,17 +8,19 @@ const CommandTooltipHelp = () => {
   return (
     <div className='command-tooltip-help-container'>
       <label
-        aria-describedby="command-tooltip-help"
+        aria-describedby='command-tooltip-help'
         onMouseEnter={() => setTooltipVisible(true)}
         onMouseLeave={() => setTooltipVisible(false)}
       >
         Do you need help with the commands?
       </label>
-      {tooltipVisible ?
-        <Tooltip id="command-tooltip-help">
+      {tooltipVisible ? (
+        <Tooltip id='command-tooltip-help'>
           <article>
             <p>Important: keys and values are Case Sensitive. Commands are not.</p>
-            <p>Keys and values only accept strings and digits with a maximum of 255 characters each.</p>
+            <p>
+              Keys and values only accept strings and digits with a maximum of 255 characters each.
+            </p>
             <h4>Commands information:</h4>
             <dl>
               <dt>SET (key) (value)</dt>
@@ -38,7 +40,7 @@ const CommandTooltipHelp = () => {
             </dl>
           </article>
         </Tooltip>
-      : null}
+      ) : null}
     </div>
   )
 }

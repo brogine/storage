@@ -7,11 +7,16 @@ interface VirtualizedListProps {
   height?: number
 }
 
-export default function VirtualizedList({ items, className, itemSize = 20, height= 700 }: VirtualizedListProps) {
+export default function VirtualizedList({
+  items,
+  className,
+  itemSize = 20,
+  height = 700,
+}: VirtualizedListProps) {
   return (
     <List
       className={className}
-      innerElementType="ul"
+      innerElementType='ul'
       itemData={items}
       itemCount={items.length}
       itemSize={itemSize}
