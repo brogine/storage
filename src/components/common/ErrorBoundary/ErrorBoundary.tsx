@@ -17,15 +17,19 @@ class ErrorBoundary extends Component<Props, State> {
     return { hasError: true }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // TODO: log this error
-    console.error('Uncaught error:', error, errorInfo)
-  }
+  // TODO: log this error
+  // public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  //   console.error('Uncaught error:', error, errorInfo)
+  // }
 
   public render() {
     if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>
+      return (
+        <>
+          <h1>Sorry.. there was an error</h1>
+          <button onClick={() => window.location.reload()}>Reload the page</button>
+        </>
+      )
     }
 
     return this.props.children
