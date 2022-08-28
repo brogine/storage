@@ -15,7 +15,7 @@ export default function CommandInput() {
   const [validateInput, dispatchCommand, rawValue, isValid, errorMessage] = useCommandHandler()
   const handleInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => validateInput(event.target.value),
-    [],
+    [validateInput],
   )
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key !== 'Enter') return

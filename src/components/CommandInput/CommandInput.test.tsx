@@ -1,5 +1,5 @@
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
-import { renderWithProviders } from '../../utils/testUtils'
+import { renderWithProviders } from '../../testUtils'
 import CommandInput from './CommandInput'
 
 const inputSelector = /^Write a command$/

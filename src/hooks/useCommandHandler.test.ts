@@ -1,7 +1,7 @@
 import { act } from '@testing-library/react'
 import commandValidationRules from '../config/commandValidationRules'
 import useCommandHandler from './useCommandHandler'
-import { renderHookWithProvider } from '../utils/testUtils'
+import { renderHookWithProvider } from '../testUtils'
 
 const mockDispatch = jest.fn()
 jest.mock('react-redux', () => ({
@@ -22,7 +22,7 @@ describe('useCommandHandler', () => {
       const [, , , isValid, errorMessage] = result.current
 
       expect(isValid).toBe(false)
-      expect(errorMessage).toBe(commandValidationRules['GET'].rule.errorMessage)
+      expect(errorMessage).toBe(commandValidationRules.GET.rule.errorMessage)
     })
 
     test('with a valid command on lowercase', () => {
@@ -77,7 +77,7 @@ describe('useCommandHandler', () => {
 
       const [, , , isValid, errorMessage] = result.current
       expect(isValid).toBe(false)
-      expect(errorMessage).toBe('Key and value can\'t be longer than 256 characters each.')
+      expect(errorMessage).toBe("Key and value can't be longer than 256 characters each.")
     })
   })
 
@@ -94,13 +94,13 @@ describe('useCommandHandler', () => {
       const [, , , isValid, errorMessage] = result.current
 
       expect(isValid).toBe(false)
-      expect(errorMessage).toBe(commandValidationRules['GET'].rule.errorMessage)
+      expect(errorMessage).toBe(commandValidationRules.GET.rule.errorMessage)
     })
 
     describe('when is a valid command', () => {
       test('dispatches the proper actions', async () => {
         const { result } = renderHookWithProvider(useCommandHandler)
-        let [validateInput] = result.current
+        const [validateInput] = result.current
 
         act(() => {
           validateInput('DELETE someKey')

@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { StorageState } from '../../config/types'
 
@@ -41,19 +43,26 @@ export const keyValueStorageSlice = createSlice({
     },
     getRecord: (state, action: PayloadAction<string>) => {
       const transactionsLength = state.transactions.length
-      const { records } = transactionsLength > 0 ? state.transactions[transactionsLength - 1] : state
+      const { records } =
+        transactionsLength > 0 ? state.transactions[transactionsLength - 1] : state
       state.logs.push(records[action.payload] || 'key not set')
     },
     countRecords: (state, action: PayloadAction<string>) => {
       const transactionsLength = state.transactions.length
-      const { records } = transactionsLength > 0 ? state.transactions[transactionsLength - 1] : state
-      const elementsByValueCount = Object.values(records).reduce((acc, element) => acc += element === action.payload ? 1 : 0, 0)
+      const { records } =
+        transactionsLength > 0 ? state.transactions[transactionsLength - 1] : state
+      const elementsByValueCount = Object.values(records).reduce(
+        (acc, element) => (acc += element === action.payload ? 1 : 0),
+        0,
+      )
       state.logs.push(elementsByValueCount.toString())
     },
     beginTransaction: (state) => {
       // We're going to use last transaction image or the state as source of truth
       const transactionsLength = state.transactions.length
-      const recordsImage = transactionsLength ? state.transactions[transactionsLength - 1].records : state.records
+      const recordsImage = transactionsLength
+        ? state.transactions[transactionsLength - 1].records
+        : state.records
       state.transactions.push({ records: recordsImage })
     },
     commitLatestTransaction: (state) => {
@@ -84,8 +93,8 @@ export const keyValueStorageSlice = createSlice({
     },
     logCommand: (state, action: PayloadAction<string>) => {
       state.logs.push(action.payload)
-    }
-  }
+    },
+  },
 })
 
 export const {
